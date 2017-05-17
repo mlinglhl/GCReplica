@@ -10,6 +10,7 @@ import UIKit
 import CoreGraphics
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate {
+    @IBOutlet weak var tableViewTopAnchor: NSLayoutConstraint!
     
     struct TestObject {
         var name = ""
@@ -31,7 +32,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func viewDidLayoutSubviews() {
-        rowHeight = view.frame.width*0.8
+        rowHeight = view.frame.width*0.85
     }
     
     @IBAction func tableViewTapped(_ sender: UITapGestureRecognizer) {
@@ -43,26 +44,67 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if header.frame.contains(tappedPoint) {
                 tableView.beginUpdates()
                 selectedSection = index
+                moveTableView()
                 tableView.endUpdates()
             }
         }
     }
     
+    func moveTableView() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.tableViewTopAnchor.constant = CGFloat(56 - self.selectedSection * 28)
+            self.view.layoutIfNeeded()
+        })
+    }
+    
     @IBAction func panOnView(_ sender: UIPanGestureRecognizer) {
-//                let translation = sender.translation(in: view)
-        //        tableView.beginUpdates()
-        //        if translation.y > 0 {
-        //            selectedSection += 1
-        //        } else {
-        //            selectedSection -= 1
-        //        }
-        //
-        //        if selectedSection < 0 {
-        //            selectedSection = 0
-        //        }
-        //        tableView.endUpdates()
-        //
-                sender.setTranslation(CGPoint(x: 0, y: 0), in: tableView)
+        let translation = sender.translation(in: view)
+                tableView.beginUpdates()
+        if translation.y > 50 {
+            selectedSection += 1
+            sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
+        }
+        
+        if translation.y < -50 {
+            selectedSection -= 1
+            sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
+        }
+        if selectedSection < 0 {
+            selectedSection = 0
+        }
+        
+        if selectedSection > testObjects.count - 1 {
+            selectedSection = testObjects.count - 1
+        }
+        moveTableView()
+        tableView.endUpdates()
+        
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let itemWidth = Float(rowHeight)
+        let currentOffset = Float(scrollView.contentOffset.x)
+        let targetOffset = Float(targetContentOffset.pointee.x)
+        var newTargetOffset: Float = 0
+        
+        newTargetOffset = floorf(currentOffset / itemWidth) * itemWidth
+
+        if targetOffset > currentOffset {
+            newTargetOffset = ceilf(currentOffset / itemWidth) * itemWidth
+        }
+        
+        if newTargetOffset < 0 {
+            newTargetOffset = 0
+        }
+            
+//        else if (newTargetOffset > Float(scrollView.contentSize.width)){
+//            newTargetOffset = Float(Float(scrollView.contentSize.width))
+//        }
+        print("\(newTargetOffset)")
+        
+        targetContentOffset.pointee.x = CGFloat(currentOffset)
+        scrollView.setContentOffset(CGPoint(x: CGFloat(newTargetOffset), y: scrollView.contentOffset.y), animated: true)
+        print("\(scrollView.contentOffset)")
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -98,6 +140,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let side = rowHeight
         let size = CGSize(width: side, height: side)
         layout.itemSize = size
+        cell.sectionIndex = indexPath.section
         return cell
     }
 }

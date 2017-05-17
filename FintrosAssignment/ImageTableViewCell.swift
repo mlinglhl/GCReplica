@@ -10,6 +10,7 @@ import UIKit
 
 class ImageTableViewCell: UITableViewCell {
 
+    var sectionIndex = 0
     @IBOutlet weak var collectionView: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()

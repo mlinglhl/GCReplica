@@ -21,11 +21,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAV-ci-Vnf">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAV-ci-Vnf">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wgc-gu-dFQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                    <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wgc-gu-dFQ">
+                                        <rect key="frame" x="0.0" y="56" width="375" height="463"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                         <view key="tableFooterView" contentMode="scaleToFill" id="ueK-nh-cd2">
@@ -41,7 +41,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wUW-qg-Crv">
+                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wUW-qg-Crv">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="aFy-Df-QaJ">
@@ -92,17 +92,21 @@
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="Ecb-Ic-Wej"/>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="bVU-Yr-zmL"/>
                                             <outletCollection property="gestureRecognizers" destination="Gbu-h4-QLL" appends="YES" id="c26-sz-Q9f"/>
-                                            <outletCollection property="gestureRecognizers" destination="m67-w8-Hhs" appends="YES" id="s6w-Gu-8fb"/>
+                                            <outletCollection property="gestureRecognizers" destination="m67-w8-Hhs" appends="YES" id="hxh-KL-9fy"/>
                                         </connections>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="wgc-gu-dFQ" secondAttribute="bottom" id="9n6-Fq-nmt"/>
-                                    <constraint firstItem="wgc-gu-dFQ" firstAttribute="top" secondItem="kAV-ci-Vnf" secondAttribute="top" id="cQw-K1-GFj"/>
+                                    <constraint firstAttribute="bottom" secondItem="wgc-gu-dFQ" secondAttribute="bottom" constant="128" id="9n6-Fq-nmt"/>
+                                    <constraint firstItem="wgc-gu-dFQ" firstAttribute="top" secondItem="kAV-ci-Vnf" secondAttribute="top" constant="56" id="cQw-K1-GFj"/>
                                     <constraint firstAttribute="trailing" secondItem="wgc-gu-dFQ" secondAttribute="trailing" id="jKa-ea-V4E"/>
                                     <constraint firstItem="wgc-gu-dFQ" firstAttribute="leading" secondItem="kAV-ci-Vnf" secondAttribute="leading" id="v6q-Uu-z7X"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="m67-w8-Hhs" appends="YES" id="sKO-YE-DwN"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -116,6 +120,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="wgc-gu-dFQ" id="azU-sK-Hri"/>
+                        <outlet property="tableViewTopAnchor" destination="cQw-K1-GFj" id="QBU-Gf-PiQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
