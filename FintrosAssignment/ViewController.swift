@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableViewTopAnchor: NSLayoutConstraint!
     let objectManager = ObjectManager.sharedInstance
     var headerArray = [UITableViewHeaderFooterView]()
-    
+    var selectedObject: EquipmentObject!
     var rowHeight:CGFloat = 40
     var selectedSection = 0
     var collectionViewDataSourceArray = [CollectionViewDataSource]()
@@ -128,6 +128,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 0
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let dataSource = collectionView.dataSource as! CollectionViewDataSource
+        let sectionIndex = dataSource.sectionIndex
+        let type = objectManager.sectionNames[sectionIndex]
+        selectedObject = objectManager.objectDictionary[type]![indexPath.item]
+        performSegue(withIdentifier: "DetailViewController", sender: self)
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let name = "- \(objectManager.sectionNames[section])"
         return name.uppercased()
@@ -153,6 +161,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionat section: Int) -> CGFloat {
         return rowHeight
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DetailViewController" {
+            let dvc = segue.destination as! DetailViewController
+            dvc.equipmentObject = selectedObject
+        }
     }
     
 }

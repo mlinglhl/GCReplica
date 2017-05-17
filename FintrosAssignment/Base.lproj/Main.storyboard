@@ -58,8 +58,9 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vqf-vZ-Gof">
+                                                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vqf-vZ-Gof">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                                <gestureRecognizers/>
                                                                             </imageView>
                                                                         </subviews>
                                                                     </view>
@@ -91,12 +92,10 @@
                                         <connections>
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="Ecb-Ic-Wej"/>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="bVU-Yr-zmL"/>
-                                            <outletCollection property="gestureRecognizers" destination="Gbu-h4-QLL" appends="YES" id="c26-sz-Q9f"/>
                                             <outletCollection property="gestureRecognizers" destination="m67-w8-Hhs" appends="YES" id="kPx-93-lhq"/>
                                         </connections>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="wgc-gu-dFQ" secondAttribute="bottom" id="9n6-Fq-nmt"/>
@@ -104,6 +103,9 @@
                                     <constraint firstAttribute="trailing" secondItem="wgc-gu-dFQ" secondAttribute="trailing" id="jKa-ea-V4E"/>
                                     <constraint firstItem="wgc-gu-dFQ" firstAttribute="leading" secondItem="kAV-ci-Vnf" secondAttribute="leading" id="v6q-Uu-z7X"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Gbu-h4-QLL" appends="YES" id="xaP-St-kSR"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -115,25 +117,80 @@
                             <constraint firstAttribute="trailing" secondItem="kAV-ci-Vnf" secondAttribute="trailing" id="yOt-Jk-ezR"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="I56-Cq-yP1"/>
+                    <navigationItem key="navigationItem" id="I56-Cq-yP1">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="qGl-28-u4c">
+                            <connections>
+                                <segue destination="HPw-89-CEj" kind="show" id="JUv-js-6B6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="wgc-gu-dFQ" id="azU-sK-Hri"/>
                         <outlet property="tableViewTopAnchor" destination="cQw-K1-GFj" id="QBU-Gf-PiQ"/>
+                        <segue destination="HPw-89-CEj" kind="show" identifier="DetailViewController" id="FJx-rl-QxZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Gbu-h4-QLL">
-                    <connections>
-                        <action selector="tableViewTapped:" destination="BYZ-38-t0r" id="OeO-41-Qa6"/>
-                    </connections>
-                </tapGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="m67-w8-Hhs">
                     <connections>
                         <action selector="panOnView:" destination="BYZ-38-t0r" id="red-iz-1bi"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="Gbu-h4-QLL">
+                    <connections>
+                        <action selector="tableViewTapped:" destination="BYZ-38-t0r" id="OeO-41-Qa6"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1079.2" y="137.18140929535232"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="bCN-QR-iDV">
+            <objects>
+                <viewController id="HPw-89-CEj" customClass="DetailViewController" customModule="FintrosAssignment" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oAT-tQ-wz4"/>
+                        <viewControllerLayoutGuide type="bottom" id="4A1-as-z61"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="M8t-i3-JFi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="ehM-lv-7Pj">
+                                <rect key="frame" x="0.0" y="184" width="375" height="483"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Gyy-YZ-qXQ" appends="YES" id="QfL-zC-kjd"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ehM-lv-7Pj" firstAttribute="leading" secondItem="M8t-i3-JFi" secondAttribute="leading" id="79I-f9-88O"/>
+                            <constraint firstAttribute="trailing" secondItem="ehM-lv-7Pj" secondAttribute="trailing" id="9al-wJ-E6m"/>
+                            <constraint firstItem="ehM-lv-7Pj" firstAttribute="top" secondItem="oAT-tQ-wz4" secondAttribute="bottom" constant="120" id="MYr-N6-iFa"/>
+                            <constraint firstItem="4A1-as-z61" firstAttribute="top" secondItem="ehM-lv-7Pj" secondAttribute="bottom" id="gQh-pF-UgM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="nOv-tb-sgv">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="fIg-B4-79d">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="HPw-89-CEj" id="6bb-R1-XfW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="ehM-lv-7Pj" id="BZi-AD-Ru8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0p0-vF-FDT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Gyy-YZ-qXQ">
+                    <connections>
+                        <action selector="imageTapped:" destination="HPw-89-CEj" id="hZr-wQ-LAJ"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1872.8" y="136.28185907046478"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="esI-KI-gDU">
@@ -154,4 +211,10 @@
             <point key="canvasLocation" x="140" y="137.18140929535232"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="default" width="225" height="225"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="JUv-js-6B6"/>
+    </inferredMetricsTieBreakers>
 </document>

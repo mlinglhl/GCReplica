@@ -13,11 +13,11 @@ class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let objectManager = ObjectManager.sharedInstance
-        let type = objectManager.sectionNames[section]
+        let type = objectManager.sectionNames[sectionIndex]
         let objectArray = objectManager.objectDictionary[type] ?? [EquipmentObject]()
         return objectArray.count
     }
-    
+        
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
         let objectManager = ObjectManager.sharedInstance
