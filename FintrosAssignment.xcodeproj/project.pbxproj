@@ -16,6 +16,8 @@
 		8952E1851ECA95890002F3F3 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952E1841ECA95890002F3F3 /* ImageTableViewCell.swift */; };
 		89F161A01ECB68B300369B5A /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F1619F1ECB68B300369B5A /* CollectionViewDataSource.swift */; };
 		89F161A21ECB696D00369B5A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F161A11ECB696D00369B5A /* ImageCollectionViewCell.swift */; };
+		89F739DB1ECC0402003EC5FB /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F739DA1ECC0402003EC5FB /* DataManager.swift */; };
+		89F739DD1ECC05B1003EC5FB /* ObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F739DC1ECC05B1003EC5FB /* ObjectManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		8952E1841ECA95890002F3F3 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		89F1619F1ECB68B300369B5A /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		89F161A11ECB696D00369B5A /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		89F739DA1ECC0402003EC5FB /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		89F739DC1ECC05B1003EC5FB /* ObjectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 			children = (
 				8952E16F1ECA94310002F3F3 /* AppDelegate.swift */,
 				8952E1711ECA94310002F3F3 /* ViewController.swift */,
+				89F739DA1ECC0402003EC5FB /* DataManager.swift */,
+				89F739DC1ECC05B1003EC5FB /* ObjectManager.swift */,
 				89F1619F1ECB68B300369B5A /* CollectionViewDataSource.swift */,
 				8952E1841ECA95890002F3F3 /* ImageTableViewCell.swift */,
 				89F161A11ECB696D00369B5A /* ImageCollectionViewCell.swift */,
@@ -148,9 +154,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89F739DD1ECC05B1003EC5FB /* ObjectManager.swift in Sources */,
 				89F161A21ECB696D00369B5A /* ImageCollectionViewCell.swift in Sources */,
 				89F161A01ECB68B300369B5A /* CollectionViewDataSource.swift in Sources */,
 				8952E1721ECA94310002F3F3 /* ViewController.swift in Sources */,
+				89F739DB1ECC0402003EC5FB /* DataManager.swift in Sources */,
 				8952E1851ECA95890002F3F3 /* ImageTableViewCell.swift in Sources */,
 				8952E1701ECA94310002F3F3 /* AppDelegate.swift in Sources */,
 				8952E1781ECA94310002F3F3 /* FintrosAssignment.xcdatamodeld in Sources */,

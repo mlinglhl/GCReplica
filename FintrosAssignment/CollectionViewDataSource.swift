@@ -9,13 +9,24 @@
 import UIKit
 
 class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
+    var sectionIndex = 0
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        let objectManager = ObjectManager.sharedInstance
+        let type = objectManager.sectionNames[section]
+        let objectArray = objectManager.objectDictionary[type] ?? [EquipmentObject]()
+        return objectArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-        cell.cellImage.image = #imageLiteral(resourceName: "Boots4")
+        let objectManager = ObjectManager.sharedInstance
+        let type = objectManager.sectionNames[sectionIndex]
+        let objectArray = objectManager.objectDictionary[type] ?? [EquipmentObject]()
+        if objectArray.count > indexPath.row {
+            let object = objectArray[indexPath.row]
+            cell.cellImage.image = UIImage(data: object.image! as Data)
+        }
         return cell
     }
 }

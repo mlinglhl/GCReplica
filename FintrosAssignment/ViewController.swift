@@ -11,24 +11,16 @@ import CoreGraphics
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate {
     @IBOutlet weak var tableViewTopAnchor: NSLayoutConstraint!
-    
-    struct TestObject {
-        var name = ""
-    }
+    let objectManager = ObjectManager.sharedInstance
+    var headerArray = [UITableViewHeaderFooterView]()
     
     var rowHeight:CGFloat = 40
     var selectedSection = 0
-    var testObjects = [TestObject]()
-    let collectionViewDataSource = CollectionViewDataSource()
-    let sectionNames = ["Gloves", "Boots", "Bindings", "Hoodies"]
+    var collectionViewDataSourceArray = [CollectionViewDataSource]()
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        for name in sectionNames {
-            var testObject = TestObject()
-            testObject.name = name
-            testObjects.append(testObject)
-        }
+        objectManager.setUp()
     }
     
     override func viewDidLayoutSubviews() {
@@ -37,7 +29,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func tableViewTapped(_ sender: UITapGestureRecognizer) {
         let tappedPoint = sender.location(in: tableView)
-        for index in 0..<sectionNames.count {
+        for index in 0..<objectManager.sectionNames.count {
             guard let header = tableView.headerView(forSection: index) else {
                 return
             }
@@ -50,7 +42,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.textColor = .gray
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        if section == 0 {
+            header.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        }
+        header.textLabel?.frame = header.frame
+        header.backgroundView?.backgroundColor = .clear
+        headerArray.append(header)
+    }
+    
     func moveTableView() {
+        for index in 0..<self.headerArray.count {
+            let header = self.headerArray[index]
+            header.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+            if index == self.selectedSection {
+                header.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+                header.textLabel?.sizeToFit()
+            }
+        }
         UIView.animate(withDuration: 0.5, animations: {
             self.tableViewTopAnchor.constant = CGFloat(56 - self.selectedSection * 28)
             self.view.layoutIfNeeded()
@@ -59,7 +71,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func panOnView(_ sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: view)
-                tableView.beginUpdates()
+        tableView.beginUpdates()
         if translation.y > 50 {
             selectedSection += 1
             sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
@@ -69,16 +81,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             selectedSection -= 1
             sender.setTranslation(CGPoint(x: 0, y: 0), in: view)
         }
+        
         if selectedSection < 0 {
             selectedSection = 0
         }
         
-        if selectedSection > testObjects.count - 1 {
-            selectedSection = testObjects.count - 1
+        if selectedSection > objectManager.sectionNames.count - 1 {
+            selectedSection = objectManager.sectionNames.count - 1
         }
         moveTableView()
         tableView.endUpdates()
-        
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -88,7 +100,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var newTargetOffset: Float = 0
         
         newTargetOffset = floorf(currentOffset / itemWidth) * itemWidth
-
+        
         if targetOffset > currentOffset {
             newTargetOffset = ceilf(currentOffset / itemWidth) * itemWidth
         }
@@ -96,19 +108,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if newTargetOffset < 0 {
             newTargetOffset = 0
         }
-            
-//        else if (newTargetOffset > Float(scrollView.contentSize.width)){
-//            newTargetOffset = Float(Float(scrollView.contentSize.width))
-//        }
-        print("\(newTargetOffset)")
+        
+        //        else if (newTargetOffset > Float(scrollView.contentSize.width)){
+        //            newTargetOffset = Float(Float(scrollView.contentSize.width))
+        //        }
         
         targetContentOffset.pointee.x = CGFloat(currentOffset)
         scrollView.setContentOffset(CGPoint(x: CGFloat(newTargetOffset), y: scrollView.contentOffset.y), animated: true)
-        print("\(scrollView.contentOffset)")
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return testObjects.count
+        return objectManager.sectionNames.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -119,8 +129,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let testObject = testObjects[section]
-        let name = "- \(testObject.name)"
+        let name = "- \(objectManager.sectionNames[section])"
         return name.uppercased()
     }
     
@@ -128,19 +137,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionat section: Int) -> CGFloat {
-        return rowHeight
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ImageTableViewCell", for: indexPath) as! ImageTableViewCell
-        cell.collectionView.dataSource = collectionViewDataSource
+        let dataSource = CollectionViewDataSource()
+        collectionViewDataSourceArray.append(dataSource)
+        dataSource.sectionIndex = indexPath.section
+        cell.collectionView.dataSource = dataSource
         cell.collectionView.delegate = self
         let layout = cell.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         let side = rowHeight
         let size = CGSize(width: side, height: side)
         layout.itemSize = size
-        cell.sectionIndex = indexPath.section
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionat section: Int) -> CGFloat {
+        return rowHeight
+    }
+    
 }
