@@ -59,7 +59,7 @@ class ObjectManager: NSObject {
             let newObject = dataManager.createEquipmentObject()
             newObject.type = type
             let image = UIImage(named: "\(type)\(index)") ?? #imageLiteral(resourceName: "Bindings1")
-            newObject.image = UIImagePNGRepresentation(image)! as NSData
+            newObject.image = UIImageJPEGRepresentation(image, 1.0)! as NSData
             newObject.dateCreated = NSDate()
         }
     }
