@@ -202,6 +202,7 @@
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="n1x-bf-dEY" firstAttribute="centerY" secondItem="ENK-lf-XCL" secondAttribute="centerY" id="1iv-Ff-6uC"/>
                             <constraint firstItem="rtx-Jw-ZvD" firstAttribute="leading" secondItem="M8t-i3-JFi" secondAttribute="leading" id="1sW-oP-e6F"/>
@@ -222,6 +223,9 @@
                             <constraint firstItem="rtx-Jw-ZvD" firstAttribute="top" secondItem="xrB-D7-8th" secondAttribute="bottom" constant="8" id="nHX-8x-eGt"/>
                             <constraint firstItem="n1x-bf-dEY" firstAttribute="centerX" secondItem="xrB-D7-8th" secondAttribute="centerX" id="s5t-jk-pVF"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="WNO-wA-def" appends="YES" id="8kS-Iq-B26"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="nOv-tb-sgv">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="fIg-B4-79d">
@@ -244,6 +248,11 @@
                 <tapGestureRecognizer id="Gyy-YZ-qXQ">
                     <connections>
                         <action selector="imageTapped:" destination="HPw-89-CEj" id="hZr-wQ-LAJ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="WNO-wA-def">
+                    <connections>
+                        <action selector="viewTapped:" destination="HPw-89-CEj" id="Ija-7R-1WI"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     let picker = UIImagePickerController()
     var delegate: ReloadDataProtocol!
     var equipmentObject: EquipmentObject?
@@ -27,6 +27,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         typePickerView.dataSource = self
         typePickerView.delegate = self
         newTypeTextField.isHidden = true
+        newTypeTextField.delegate = self
         newTypeTextField.transform = CGAffineTransform(scaleX: 0, y: 1)
         deleteSwitch.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
         
@@ -44,6 +45,20 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             let index = ObjectManager.sharedInstance.sectionNames.index(of: equipmentObject.type!)
             typePickerView.selectRow(index!, inComponent: 0, animated: false)
         }
+    }
+
+    
+    @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
+        dismissKeyboard()
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return false
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
