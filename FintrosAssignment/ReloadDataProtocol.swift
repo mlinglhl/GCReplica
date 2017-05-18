@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ReloadDataProtocol {
-    func reloadData()
+    func reloadData(type: String)
 }

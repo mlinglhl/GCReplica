@@ -13,11 +13,13 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     var delegate: ReloadDataProtocol!
     var equipmentObject: EquipmentObject?
     
+    @IBOutlet weak var deleteSwitch: UISwitch!
     @IBOutlet var typePickerHeight: NSLayoutConstraint!
     @IBOutlet weak var newTypeTextField: UITextField!
     @IBOutlet weak var useExistingTypeSwitch: UISwitch!
     @IBOutlet weak var typePickerView: UIPickerView!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var deleteLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +28,21 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         typePickerView.delegate = self
         newTypeTextField.isHidden = true
         newTypeTextField.transform = CGAffineTransform(scaleX: 0, y: 1)
+        deleteSwitch.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+        
+        if equipmentObject == nil {
+            deleteSwitch.isEnabled = false
+            deleteLabel.alpha = 0.3
+        }
+        
         useExistingTypeSwitch.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
         if let equipmentObject = equipmentObject {
             if equipmentObject.image != nil {
                 let image = UIImage(data: equipmentObject.image! as Data)
                 imageView.image = image
             }
+            let index = ObjectManager.sharedInstance.sectionNames.index(of: equipmentObject.type!)
+            typePickerView.selectRow(index!, inComponent: 0, animated: false)
         }
     }
     
@@ -82,7 +93,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         if type == "" {
             type = "Misc"
         }
-        
         if useExistingTypeSwitch.isOn {
             let index = typePickerView.selectedRow(inComponent: 0)
             if objectManager.sectionNames.count > index {
@@ -93,20 +103,21 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         if equipmentObject == nil {
             equipmentObject = DataManager.sharedInstance.createEquipmentObject()
             equipmentObject!.dateCreated = NSDate()
-            objectManager.objectDictionary[type]?.append(equipmentObject!)
-            if !objectManager.sectionNames.contains(type) {
-                objectManager.objectDictionary.updateValue([equipmentObject!], forKey: type)
-                objectManager.sectionNames.append(type)
-                objectManager.sectionNames = ObjectManager.sharedInstance.sectionNames.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
-            }
+            objectManager.equipmentObjectArray.append(equipmentObject!)
         } else {
-            objectManager.objectDictionary[type]?.append(equipmentObject!)
+            if equipmentObject!.type != type {
+                equipmentObject?.dateCreated = NSDate()
+            }
         }
-        equipmentObject!.type = type
-        equipmentObject!.image = UIImagePNGRepresentation(imageView.image!)! as NSData
-        
+            equipmentObject!.type = type
+            equipmentObject!.image = UIImagePNGRepresentation(imageView.image!)! as NSData
+
+        if deleteSwitch.isOn {
+            DataManager.sharedInstance.persistentContainer.viewContext.delete(equipmentObject!)
+        }
+
         DataManager.sharedInstance.saveContext()
-        delegate.reloadData()
+        delegate.reloadData(type: type)
         navigationController?.popViewController(animated: true)
     }
     

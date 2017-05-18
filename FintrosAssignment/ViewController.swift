@@ -24,10 +24,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         objectManager.setUp()
     }
     
-    func reloadData() {
+    func reloadData(type: String) {
+        objectManager.equipmentObjectArray = DataManager.sharedInstance.getEquipmentObjects()
         objectManager.buildDictionary()
         objectManager.buildSections()
+        let index = objectManager.sectionNames.index(of: type)
+        selectedSection = index ?? 0
         tableView.reloadData()
+        moveTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,24 +61,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
         header.textLabel?.textColor = .gray
-        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        if section == 0 {
-            header.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        }
+//        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+//        if section == selectedSection {
+//            header.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+//            header.textLabel?.sizeToFit()
+//        }
         header.textLabel?.frame = header.frame
         header.backgroundView?.backgroundColor = .clear
         headerArray.append(header)
     }
     
     func moveTableView() {
-        for index in 0..<self.headerArray.count {
-            let header = self.headerArray[index]
-            header.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-            if index == self.selectedSection {
-                header.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-                header.textLabel?.sizeToFit()
-            }
-        }
+//        for index in 0..<self.headerArray.count {
+//            let header = self.headerArray[index]
+//            header.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+//            if index == self.selectedSection {
+//                header.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+//                header.textLabel?.sizeToFit()
+//            }
+//        }
         UIView.animate(withDuration: 0.5, animations: {
             self.tableViewTopAnchor.constant = CGFloat(56 - self.selectedSection * 28)
             self.view.layoutIfNeeded()
@@ -121,9 +126,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             newTargetOffset = 0
         }
         
-        //        else if (newTargetOffset > Float(scrollView.contentSize.width)){
-        //            newTargetOffset = Float(Float(scrollView.contentSize.width))
-        //        }
+                else if (newTargetOffset > Float(scrollView.contentSize.width)){
+                    newTargetOffset = Float(Float(scrollView.contentSize.width))
+                }
         
         targetContentOffset.pointee.x = CGFloat(currentOffset)
         scrollView.setContentOffset(CGPoint(x: CGFloat(newTargetOffset), y: scrollView.contentOffset.y), animated: true)
