@@ -16,10 +16,12 @@
 		8952E17A1ECA94310002F3F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8952E1791ECA94310002F3F3 /* Assets.xcassets */; };
 		8952E17D1ECA94310002F3F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8952E17B1ECA94310002F3F3 /* LaunchScreen.storyboard */; };
 		8952E1851ECA95890002F3F3 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952E1841ECA95890002F3F3 /* ImageTableViewCell.swift */; };
+		89E6B27E1ECE053C00A886F9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E6B27D1ECE053C00A886F9 /* CoreDataManager.swift */; };
 		89F161A01ECB68B300369B5A /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F1619F1ECB68B300369B5A /* CollectionViewDataSource.swift */; };
 		89F161A21ECB696D00369B5A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F161A11ECB696D00369B5A /* ImageCollectionViewCell.swift */; };
 		89F739DB1ECC0402003EC5FB /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F739DA1ECC0402003EC5FB /* DataManager.swift */; };
 		89F739DD1ECC05B1003EC5FB /* ObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F739DC1ECC05B1003EC5FB /* ObjectManager.swift */; };
+		9F6D646917EC2A066424C7A8 /* Pods_FintrosAssignment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92F7FBF30A529B5B444CC417 /* Pods_FintrosAssignment.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,10 +36,14 @@
 		8952E17C1ECA94310002F3F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8952E17E1ECA94310002F3F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8952E1841ECA95890002F3F3 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		89E6B27D1ECE053C00A886F9 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		89F1619F1ECB68B300369B5A /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		89F161A11ECB696D00369B5A /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		89F739DA1ECC0402003EC5FB /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		89F739DC1ECC05B1003EC5FB /* ObjectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectManager.swift; sourceTree = "<group>"; };
+		92F7FBF30A529B5B444CC417 /* Pods_FintrosAssignment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FintrosAssignment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1320E9022E4BABC66F411B6 /* Pods-FintrosAssignment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FintrosAssignment.release.xcconfig"; path = "Pods/Target Support Files/Pods-FintrosAssignment/Pods-FintrosAssignment.release.xcconfig"; sourceTree = "<group>"; };
+		EB4A4733A07D25544EDB74BA /* Pods-FintrosAssignment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FintrosAssignment.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FintrosAssignment/Pods-FintrosAssignment.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,17 +51,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F6D646917EC2A066424C7A8 /* Pods_FintrosAssignment.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7600017EF87E65274FF69E74 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EB4A4733A07D25544EDB74BA /* Pods-FintrosAssignment.debug.xcconfig */,
+				E1320E9022E4BABC66F411B6 /* Pods-FintrosAssignment.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		798AD0C166CAA0D21F742398 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				92F7FBF30A529B5B444CC417 /* Pods_FintrosAssignment.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8952E1631ECA94310002F3F3 = {
 			isa = PBXGroup;
 			children = (
 				8952E16E1ECA94310002F3F3 /* FintrosAssignment */,
 				8952E16D1ECA94310002F3F3 /* Products */,
+				7600017EF87E65274FF69E74 /* Pods */,
+				798AD0C166CAA0D21F742398 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,6 +101,7 @@
 				8946F7BC1ECCDB63004B6460 /* DetailViewController.swift */,
 				8946F7C01ECCF56E004B6460 /* ReloadDataProtocol.swift */,
 				89F739DA1ECC0402003EC5FB /* DataManager.swift */,
+				89E6B27D1ECE053C00A886F9 /* CoreDataManager.swift */,
 				89F739DC1ECC05B1003EC5FB /* ObjectManager.swift */,
 				89F1619F1ECB68B300369B5A /* CollectionViewDataSource.swift */,
 				8952E1841ECA95890002F3F3 /* ImageTableViewCell.swift */,
@@ -95,9 +122,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8952E1811ECA94310002F3F3 /* Build configuration list for PBXNativeTarget "FintrosAssignment" */;
 			buildPhases = (
+				D2EB6FB77DD3B439666DE2C3 /* [CP] Check Pods Manifest.lock */,
 				8952E1681ECA94310002F3F3 /* Sources */,
 				8952E1691ECA94310002F3F3 /* Frameworks */,
 				8952E16A1ECA94310002F3F3 /* Resources */,
+				8AD896209A2CDFDA54DF372A /* [CP] Embed Pods Frameworks */,
+				08ED2D457BBE20C89C1CB68A /* [CP] Copy Pods Resources */,
+				89389AE51ECDE93400FBC098 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -156,6 +187,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		08ED2D457BBE20C89C1CB68A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FintrosAssignment/Pods-FintrosAssignment-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89389AE51ECDE93400FBC098 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" a77fae26dde65be7e268208abf4a8e470838061c d3e0cf28d3ab6bb730d2ada3a5244d5fa1bae26dfc3975b88fd7d2ce2588c267";
+		};
+		8AD896209A2CDFDA54DF372A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FintrosAssignment/Pods-FintrosAssignment-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2EB6FB77DD3B439666DE2C3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8952E1681ECA94310002F3F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -171,6 +263,7 @@
 				8952E1851ECA95890002F3F3 /* ImageTableViewCell.swift in Sources */,
 				8952E1701ECA94310002F3F3 /* AppDelegate.swift in Sources */,
 				8952E1781ECA94310002F3F3 /* FintrosAssignment.xcdatamodeld in Sources */,
+				89E6B27E1ECE053C00A886F9 /* CoreDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,26 +386,34 @@
 		};
 		8952E1821ECA94310002F3F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB4A4733A07D25544EDB74BA /* Pods-FintrosAssignment.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8W6YWGY77W;
 				INFOPLIST_FILE = FintrosAssignment/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mling.GlidingCollectionReplica;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		8952E1831ECA94310002F3F3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1320E9022E4BABC66F411B6 /* Pods-FintrosAssignment.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8W6YWGY77W;
 				INFOPLIST_FILE = FintrosAssignment/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mling.GlidingCollectionReplica;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -128,7 +128,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             equipmentObject!.image = UIImageJPEGRepresentation(imageView.image!, 1.0)! as NSData
 
         if deleteSwitch.isOn {
-            DataManager.sharedInstance.persistentContainer.viewContext.delete(equipmentObject!)
+            DataManager.sharedInstance.delegate.managedObjectContext.delete(equipmentObject!)
         }
 
         DataManager.sharedInstance.saveContext()
