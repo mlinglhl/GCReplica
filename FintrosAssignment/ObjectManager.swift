@@ -27,9 +27,11 @@ class ObjectManager: NSObject {
             equipmentObjectArray = dataManager.getEquipmentObjects()
         }
         buildDictionary()
+        buildSections()
     }
     
     func buildDictionary() {
+        objectDictionary.removeAll()
         for object in equipmentObjectArray {
             if object.type == nil {
                 object.type = "Misc"
@@ -45,9 +47,11 @@ class ObjectManager: NSObject {
             array.append(object)
             objectDictionary.updateValue(array, forKey: type)
         }
-        
+    }
+    
+    func buildSections() {
         let nameArray = Array(objectDictionary.keys).sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
-        sectionNames = nameArray
+        sectionNames = nameArray.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
     }
     
     func createObjectsWithType(_ type: String) {
@@ -56,6 +60,7 @@ class ObjectManager: NSObject {
             newObject.type = type
             let image = UIImage(named: "\(type)\(index)") ?? #imageLiteral(resourceName: "Bindings1")
             newObject.image = UIImagePNGRepresentation(image)! as NSData
+            newObject.dateCreated = NSDate()
         }
     }
 }

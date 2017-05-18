@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8946F7BD1ECCDB63004B6460 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8946F7BC1ECCDB63004B6460 /* DetailViewController.swift */; };
+		8946F7C11ECCF56E004B6460 /* ReloadDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8946F7C01ECCF56E004B6460 /* ReloadDataProtocol.swift */; };
 		8952E1701ECA94310002F3F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952E16F1ECA94310002F3F3 /* AppDelegate.swift */; };
 		8952E1721ECA94310002F3F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8952E1711ECA94310002F3F3 /* ViewController.swift */; };
 		8952E1751ECA94310002F3F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8952E1731ECA94310002F3F3 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		8946F7BC1ECCDB63004B6460 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		8946F7C01ECCF56E004B6460 /* ReloadDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReloadDataProtocol.swift; sourceTree = "<group>"; };
 		8952E16C1ECA94310002F3F3 /* FintrosAssignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FintrosAssignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8952E16F1ECA94310002F3F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8952E1711ECA94310002F3F3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				8952E16F1ECA94310002F3F3 /* AppDelegate.swift */,
 				8952E1711ECA94310002F3F3 /* ViewController.swift */,
 				8946F7BC1ECCDB63004B6460 /* DetailViewController.swift */,
+				8946F7C01ECCF56E004B6460 /* ReloadDataProtocol.swift */,
 				89F739DA1ECC0402003EC5FB /* DataManager.swift */,
 				89F739DC1ECC05B1003EC5FB /* ObjectManager.swift */,
 				89F1619F1ECB68B300369B5A /* CollectionViewDataSource.swift */,
@@ -157,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8946F7C11ECCF56E004B6460 /* ReloadDataProtocol.swift in Sources */,
 				8946F7BD1ECCDB63004B6460 /* DetailViewController.swift in Sources */,
 				89F739DD1ECC05B1003EC5FB /* ObjectManager.swift in Sources */,
 				89F161A21ECB696D00369B5A /* ImageCollectionViewCell.swift in Sources */,

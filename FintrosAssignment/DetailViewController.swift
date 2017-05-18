@@ -8,21 +8,43 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     let picker = UIImagePickerController()
-
+    var delegate: ReloadDataProtocol!
     var equipmentObject: EquipmentObject?
     
+    @IBOutlet var typePickerHeight: NSLayoutConstraint!
+    @IBOutlet weak var newTypeTextField: UITextField!
+    @IBOutlet weak var useExistingTypeSwitch: UISwitch!
+    @IBOutlet weak var typePickerView: UIPickerView!
     @IBOutlet weak var imageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
+        typePickerView.dataSource = self
+        typePickerView.delegate = self
+        newTypeTextField.isHidden = true
+        newTypeTextField.transform = CGAffineTransform(scaleX: 0, y: 1)
+        useExistingTypeSwitch.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
         if let equipmentObject = equipmentObject {
             if equipmentObject.image != nil {
                 let image = UIImage(data: equipmentObject.image! as Data)
                 imageView.image = image
             }
         }
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return ObjectManager.sharedInstance.sectionNames.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return ObjectManager.sharedInstance.sectionNames[row]
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -32,16 +54,59 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-         dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func useExistingTypeSwitchChanged(_ sender: UISwitch) {
+        newTypeTextField.isHidden = false
+        typePickerView.isHidden = false
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            if sender.isOn {
+                self.typePickerView.transform = CGAffineTransform.identity
+                self.newTypeTextField.transform = CGAffineTransform(scaleX: 0, y: 1)
+            } else {
+                self.typePickerView.transform = CGAffineTransform(scaleX: 1, y: 0)
+                self.newTypeTextField.transform = CGAffineTransform.identity
+            }
+            self.view.layoutIfNeeded()
+        }, completion: { (finished: Bool) in
+            self.newTypeTextField.isHidden = sender.isOn
+            self.typePickerView.isHidden = !sender.isOn
+        })
     }
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        let objectManager = ObjectManager.sharedInstance
+        var type = newTypeTextField.text ?? ""
+        if type == "" {
+            type = "Misc"
+        }
+        
+        if useExistingTypeSwitch.isOn {
+            let index = typePickerView.selectedRow(inComponent: 0)
+            if objectManager.sectionNames.count > index {
+                type = objectManager.sectionNames[index]
+            }
+        }
+        
         if equipmentObject == nil {
             equipmentObject = DataManager.sharedInstance.createEquipmentObject()
-            equipmentObject!.type = "Misc"
+            equipmentObject!.dateCreated = NSDate()
+            objectManager.objectDictionary[type]?.append(equipmentObject!)
+            if !objectManager.sectionNames.contains(type) {
+                objectManager.objectDictionary.updateValue([equipmentObject!], forKey: type)
+                objectManager.sectionNames.append(type)
+                objectManager.sectionNames = ObjectManager.sharedInstance.sectionNames.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
+            }
+        } else {
+            objectManager.objectDictionary[type]?.append(equipmentObject!)
         }
+        equipmentObject!.type = type
         equipmentObject!.image = UIImagePNGRepresentation(imageView.image!)! as NSData
+        
         DataManager.sharedInstance.saveContext()
+        delegate.reloadData()
         navigationController?.popViewController(animated: true)
     }
     

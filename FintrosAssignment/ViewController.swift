@@ -9,18 +9,30 @@
 import UIKit
 import CoreGraphics
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, ReloadDataProtocol {
     @IBOutlet weak var tableViewTopAnchor: NSLayoutConstraint!
     let objectManager = ObjectManager.sharedInstance
     var headerArray = [UITableViewHeaderFooterView]()
     var selectedObject: EquipmentObject!
     var rowHeight:CGFloat = 40
     var selectedSection = 0
+    var collectionViewArray = [UICollectionView]()
     var collectionViewDataSourceArray = [CollectionViewDataSource]()
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         objectManager.setUp()
+    }
+    
+    func reloadData() {
+        objectManager.buildDictionary()
+        objectManager.buildSections()
+        tableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        selectedObject = nil
+        super.viewWillAppear(animated)
     }
     
     override func viewDidLayoutSubviews() {
@@ -148,6 +160,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ImageTableViewCell", for: indexPath) as! ImageTableViewCell
         let dataSource = CollectionViewDataSource()
+        collectionViewArray.append(cell.collectionView)
         collectionViewDataSourceArray.append(dataSource)
         dataSource.sectionIndex = indexPath.section
         cell.collectionView.dataSource = dataSource
@@ -166,7 +179,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailViewController" {
             let dvc = segue.destination as! DetailViewController
-            dvc.equipmentObject = selectedObject
+            if selectedObject != nil {
+                dvc.equipmentObject = selectedObject
+            }
+            dvc.delegate = self
         }
     }
     
